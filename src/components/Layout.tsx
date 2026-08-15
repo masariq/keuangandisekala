@@ -8,14 +8,12 @@ import {
   BarChart3,
   CheckSquare,
   Users,
-  LogOut,
   Menu,
   X,
   TrendingUp,
   Tag,
   Settings,
 } from 'lucide-react';
-import { useAuth } from '@/context/AuthContext';
 
 export type PageKey =
   | 'dashboard'
@@ -57,7 +55,6 @@ interface LayoutProps {
 }
 
 export function Layout({ current, onNavigate, children }: LayoutProps) {
-  const { user, signOut } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleNav = (page: PageKey) => {
@@ -96,24 +93,6 @@ export function Layout({ current, onNavigate, children }: LayoutProps) {
           ))}
         </nav>
 
-        <div className="px-3 py-4 border-t border-slate-100">
-          <div className="flex items-center gap-3 px-3 py-2 mb-2">
-            <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 text-sm font-semibold">
-              {user?.email?.[0]?.toUpperCase() ?? '?'}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-slate-600 truncate">{user?.email}</p>
-              <p className="text-xs text-slate-400">Akun Aktif</p>
-            </div>
-          </div>
-          <button
-            onClick={signOut}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors"
-          >
-            <LogOut size={20} />
-            Keluar
-          </button>
-        </div>
       </aside>
 
       {/* Mobile header */}
@@ -164,23 +143,6 @@ export function Layout({ current, onNavigate, children }: LayoutProps) {
                 </button>
               ))}
             </nav>
-            <div className="px-3 py-4 border-t border-slate-100">
-              <div className="flex items-center gap-3 px-3 py-2 mb-2">
-                <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 text-sm font-semibold">
-                  {user?.email?.[0]?.toUpperCase() ?? '?'}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-slate-600 truncate">{user?.email}</p>
-                </div>
-              </div>
-              <button
-                onClick={signOut}
-                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors"
-              >
-                <LogOut size={20} />
-                Keluar
-              </button>
-            </div>
           </div>
         </div>
       )}
